@@ -79,3 +79,9 @@ Based on the "Retention Rate by Cohort" chart and the provided cohort sizes:
 * **Notable Differences in Short-Term Retention:**
     * Significant differences are observed. **Earlier cohorts** (January 2024 with 66 customers, February 2024 with 48 customers) demonstrate considerably lower retention rates compared to subsequent months. For instance, 1-month retention in January is around 60%, while in May and June, it reaches 100%.
     * **Later cohorts** (March to June) show a sharp improvement in retention. However, the extremely high (100%) retention rates for the May (16 customers) and June (10 customers) cohorts **might be influenced by their very small size**. This implies that even a small number of repeat purchases can lead to high percentages, or the data for these cohorts might be too recent for the full retention picture to have formed.
+ 
+### Repeat Purchase Rates by Cohort Conclusions
+
+* **Strong Initial Repurchase:** All cohorts show a very high percentage of customers making at least a second purchase (`repeat_rate_2nd_order`), consistently near 95-100%.
+* **Natural Decline:** As expected, the percentage of customers making a 3rd and 4th purchase gradually decreases from the initial high, reflecting a natural customer attrition at each subsequent purchase level.
+* **Overall Stability:** The repeat purchase rates for the 2nd order remain highly stable across all cohorts. While there are slight variations for 3rd and 4th orders, the overall trend indicates a successful initial re-engagement with customers.
