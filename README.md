@@ -51,7 +51,7 @@ All SQL queries for data transformation are located in the `sql/` folder.
 
 SQL queries for creating visualizations are also located in the `sql/` folder. Dashboard screenshots can be found in the `dashboards/` folder.
 
-* `05_retention_rate_query.sql`: Query for calculating retention rates.
+* `05_retention_rate_query.sql`: Query for calculating retention rates.  
 * `06_repeat_purchase_rate_query.sql`: Query for calculating repeat purchase rates.
 * `07_cohort_size_query.sql`: Query for calculating cohort size.
     
@@ -65,3 +65,17 @@ SQL queries for creating visualizations are also located in the `sql/` folder. D
     * Execute the scripts from the `sql/` folder sequentially, starting from `01_first_purchase_date.sql` and ending with `04_create_cohort_analysis_table.sql` to create the base `cohort_analysis` table.
     * Then, execute scripts `05_retention_rate_query.sql`, `06_repeat_purchase_rate_query.sql`, and `07_cohort_size_query.sql` to generate data for visualizations.
 4.  **Create Dashboards:** Use the results of these queries to create corresponding visualizations on your Databricks dashboard, as described in the "Project Objectives" section.
+
+## Conclusions and Next Steps
+
+### Retention Rate by Cohort Conclusions
+Based on the "Retention Rate by Cohort" chart and the provided cohort sizes:
+
+* **Highest Retention Rates:**
+    * **1 Month:** May 2024 (16 customers) and June 2024 (10 customers) cohorts show 100% retention.
+    * **2 Months:** May 2024 (16 customers) and June 2024 (10 customers) cohorts show 100% retention.
+    * **3 Months:** March 2024 (33 customers), May 2024 (16 customers), and June 2024 (10 customers) cohorts achieve 100% retention.
+
+* **Notable Differences in Short-Term Retention:**
+    * Significant differences are observed. **Earlier cohorts** (January 2024 with 66 customers, February 2024 with 48 customers) demonstrate considerably lower retention rates compared to subsequent months. For instance, 1-month retention in January is around 60%, while in May and June, it reaches 100%.
+    * **Later cohorts** (March to June) show a sharp improvement in retention. However, the extremely high (100%) retention rates for the May (16 customers) and June (10 customers) cohorts **might be influenced by their very small size**. This implies that even a small number of repeat purchases can lead to high percentages, or the data for these cohorts might be too recent for the full retention picture to have formed.
