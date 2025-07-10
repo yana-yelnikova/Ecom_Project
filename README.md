@@ -52,11 +52,9 @@ All SQL queries for data transformation are located in the `sql/` folder.
 SQL queries for creating visualizations are also located in the `sql/` folder. Dashboard screenshots can be found in the `dashboards/` folder.
 
 * `05_retention_rate_query.sql`: Query for calculating retention rates.
-    [Изображение дашборда с коэффициентом удержания]
 * `06_repeat_purchase_rate_query.sql`: Query for calculating repeat purchase rates.
-    [Изображение дашборда с коэффициентом повторных покупок]
 * `07_cohort_size_query.sql`: Query for calculating cohort size.
-    [Изображение дашборда с размером когорты]
+    
 
 ## How to Run the Project
 
