@@ -85,3 +85,9 @@ Based on the "Retention Rate by Cohort" chart and the provided cohort sizes:
 * **Strong Initial Repurchase:** All cohorts show a very high percentage of customers making at least a second purchase (`repeat_rate_2nd_order`), consistently near 95-100%.
 * **Natural Decline:** As expected, the percentage of customers making a 3rd and 4th purchase gradually decreases from the initial high, reflecting a natural customer attrition at each subsequent purchase level.
 * **Overall Stability:** The repeat purchase rates for the 2nd order remain highly stable across all cohorts. While there are slight variations for 3rd and 4th orders, the overall trend indicates a successful initial re-engagement with customers.
+
+### Cohort Size by Month Conclusions
+
+* **Largest Cohort:** The largest cohort was observed in **January 2024**, with approximately 66 new customers.
+* **Decreasing Trend:** There is a **consistent and significant decline** in the number of new customers acquired from January to June 2024.
+* **Overall Implication:** The chart clearly indicates a **negative trend in new customer acquisition** during the first half of 2024, leading to progressively smaller subsequent cohorts. This trend is a critical factor impacting overall business growth and should be further investigated.
