@@ -64,7 +64,7 @@ SQL queries for creating visualizations are also located in the `sql/` folder. D
     * Open a new SQL notebook in Databricks.
     * Execute the scripts from the `sql/` folder sequentially, starting from `01_first_purchase_date.sql` and ending with `04_create_cohort_analysis_table.sql` to create the base `cohort_analysis` table.
     * Then, execute scripts `05_retention_rate_query.sql`, `06_repeat_purchase_rate_query.sql`, and `07_cohort_size_query.sql` to generate data for visualizations.
-4.  **Create Dashboards:** Use the results of these queries to create corresponding visualizations on your Databricks dashboard, as described in the "Project Objectives" section.
+4.  **Create Dashboards:** Use the results of these queries to create corresponding visualizations on your Databricks dashboard.
 
 ## Conclusions and Next Steps
 
