@@ -71,7 +71,7 @@ SQL queries for creating visualizations are also located in the `sql/` folder. D
 ### Retention Rate by Cohort Conclusions
 Based on the "Retention Rate by Cohort" chart and the provided cohort sizes:
 
-![Retention Rate by Cohort Dashboard](dashboards/dashboards/retention_rate_cohort_dashboard.png)
+![Retention Rate by Cohort Dashboard](dashboards/retention_rate_cohort_dashboard.png)
 
 * **Highest Retention Rates:**
     * **1 Month:** May 2024 (16 customers) and June 2024 (10 customers) cohorts show 100% retention.
