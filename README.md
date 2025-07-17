@@ -73,14 +73,20 @@ Based on the "Retention Rate by Cohort" chart and the provided cohort sizes:
 
 ![Retention Rate by Cohort Dashboard](dashboards/retention_rate_cohort_dashboard.png)
 
-* **Highest Retention Rates:**
-    * **1 Month:** May 2024 (16 customers) and June 2024 (10 customers) cohorts show 100% retention.
-    * **2 Months:** May 2024 (16 customers) and June 2024 (10 customers) cohorts show 100% retention.
-    * **3 Months:** March 2024 (33 customers), May 2024 (16 customers), and June 2024 (10 customers) cohorts achieve 100% retention.
+### High Retention Rates
 
-* **Notable Differences in Short-Term Retention:**
-    * Significant differences are observed. **Earlier cohorts** (January 2024 with 66 customers, February 2024 with 48 customers) demonstrate considerably lower retention rates compared to subsequent months. For instance, 1-month retention in January is around 60%, while in May and June, it reaches 100%.
-    * **Later cohorts** (March to June) show a sharp improvement in retention. However, the extremely high (100%) retention rates for the May (16 customers) and June (10 customers) cohorts **might be influenced by their very small size**. This implies that even a small number of repeat purchases can lead to high percentages, or the data for these cohorts might be too recent for the full retention picture to have formed.
+* **2 Months:** The **April 2024** and **May 2024** cohorts show **near 100% and 100% retention**, respectively.
+* **3 Months:** The **January 2024** and **February 2024** cohorts demonstrate strong retention (around 80%), and the **March 2024** cohort nearly reaches 100%.
+
+### Notable Differences in Short-Term Retention
+
+* There's a **significant improvement in retention** for cohorts from March to May 2024 compared to earlier cohorts (January and February 2024).
+* However, the **March 2024 cohort** shows the **lowest 1-month retention (below 25%)**.
+* The **June 2024 cohort** also exhibits a **sharp drop in 1-month retention (below 25%)**, contrasting with the improvement seen in April and May, and **warrants further investigation**.
+
+### Important Considerations
+
+* **Cohort Size:** While not displayed on the chart, extremely high (near 100%) retention rates for some cohorts might be influenced by their **small size**, potentially skewing the overall picture.
  
 ### Repeat Purchase Rates by Cohort Conclusions
 
