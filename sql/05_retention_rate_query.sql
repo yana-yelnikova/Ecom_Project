@@ -1,4 +1,3 @@
-
 WITH FirstPurchases AS (
     -- CTE 1: Calculates the first purchase date for each customer
     SELECT
@@ -35,32 +34,31 @@ CustomerPurchaseDates AS (
         SecondPurchases AS sp ON fp.customer_id = sp.customer_id -- LEFT JOIN ensures all customers from FirstPurchases are included
 ),
 CustomersWithCohortAndMonthDiff AS (
-    -- CTE 4: Assigns a cohort month and calculates the month difference to the second purchase
+    -- CTE 4: Assigns a cohort month and calculates the day difference to the second purchase
     SELECT
         DATE_TRUNC('month', cpd.first_purchase_date) AS cohort_month, -- Truncates the first purchase date to the beginning of the month to define the customer's cohort
         cpd.customer_id,
         cpd.first_purchase_date,
         cpd.second_purchase_date,
+        -- Calculates the exact difference in days between the first and second purchase, using your original DATEDIFF syntax
         CASE
             WHEN cpd.second_purchase_date IS NOT NULL THEN
-                -- Calculates the difference in months between the first and second purchase.
-                -- DATEDIFF returns days, so we divide by average days in a month (30.4) and cast to INT.
-                CAST(DATEDIFF(cpd.second_purchase_date, cpd.first_purchase_date) / 30.4 AS INT)
+                DATEDIFF(cpd.second_purchase_date, cpd.first_purchase_date) -- Using your original DATEDIFF syntax
             ELSE NULL
-        END AS months_to_second_purchase
+        END AS days_since_first_purchase -- Renamed to reflect days difference more accurately
     FROM
         CustomerPurchaseDates AS cpd
 )
--- Final SELECT: Calculates retention rates for each cohort
+-- Final SELECT: Calculates retention rates for each cohort using exact day differences
 SELECT
     c.cohort_month,
     COUNT(DISTINCT c.customer_id) AS total_cohort_customers, -- Counts the total unique customers in each cohort
-    -- Calculates the percentage of customers retained within 1 month
-    ROUND(COUNT(DISTINCT CASE WHEN c.months_to_second_purchase <= 1 THEN c.customer_id ELSE NULL END) * 100.0 / COUNT(DISTINCT c.customer_id), 2) AS retention_1_month_pct,
-    -- Calculates the percentage of customers retained within 2 months
-    ROUND(COUNT(DISTINCT CASE WHEN c.months_to_second_purchase <= 2 THEN c.customer_id ELSE NULL END) * 100.0 / COUNT(DISTINCT c.customer_id), 2) AS retention_2_month_pct,
-    -- Calculates the percentage of customers retained within 3 months
-    ROUND(COUNT(DISTINCT CASE WHEN c.months_to_second_purchase <= 3 THEN c.customer_id ELSE NULL END) * 100.0 / COUNT(DISTINCT c.customer_id), 2) AS retention_3_month_pct
+    -- Calculates the percentage of customers retained within 30 days
+    ROUND(COUNT(DISTINCT CASE WHEN c.days_since_first_purchase <= 30 THEN c.customer_id ELSE NULL END) * 100.0 / COUNT(DISTINCT c.customer_id), 2) AS retention_1_month_pct,
+    -- Calculates the percentage of customers retained within 60 days
+    ROUND(COUNT(DISTINCT CASE WHEN c.days_since_first_purchase <= 60 THEN c.customer_id ELSE NULL END) * 100.0 / COUNT(DISTINCT c.customer_id), 2) AS retention_2_month_pct,
+    -- Calculates the percentage of customers retained within 90 days
+    ROUND(COUNT(DISTINCT CASE WHEN c.days_since_first_purchase <= 90 THEN c.customer_id ELSE NULL END) * 100.0 / COUNT(DISTINCT c.customer_id), 2) AS retention_3_month_pct
 FROM
     CustomersWithCohortAndMonthDiff AS c
 GROUP BY
