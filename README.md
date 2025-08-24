@@ -1,116 +1,77 @@
 # Ecom Project: Customer Cohort Analysis
 
-## Project Overview
+This project showcases a modern marketing analytics solution designed to study customer retention. The primary goal is to analyze e-commerce data to understand how long it takes for new customers to make a second purchase and how this behavior varies across different monthly cohorts.
 
-This project focuses on cohort analysis of e-commerce data using Databricks SQL. The main goal is to understand customer behavior after their first purchase, specifically how long it takes for a second purchase and how this varies across different customer cohorts.
+The project demonstrates an end-to-end data pipeline:
+* **Ingestion**: E-commerce sales data was ingested from a **GCP Cloud SQL** database using **Fivetran**.
+* **Transformation**: The data was transformed and modeled in **Databricks** leveraging **Delta Lake**.
+* **Visualization**: Cohort trends were visualized using a **Databricks Dashboard**.
 
-## Use Case Background
+➡️ **[See Detailed Analysis, Conclusions, and Next Steps](./ANALYSIS.md)** ⬅️
 
-Customer acquisition is expensive, so companies need to understand if new customers are returning to make repeat purchases. A "cohort" is a group of customers defined by a shared characteristic (such as the date of their first purchase). This project aims to answer the central question: How long does it take for customers to make their second purchase, and how does this vary across different cohorts?
+---
+## 1. Use Case Background
 
-## Data (Overview of the Sample Data)
+Customer acquisition is expensive, so companies need to understand if new customers are returning to make repeat purchases. A "cohort" is a group of customers defined by a shared characteristic (such as the date of their first purchase). This project aims to answer the central question:
 
-This project simulates an e-commerce sales dataset using a table named `ecom_orders`. This table represents transactional data and includes the following columns:
+> **How long does it take for customers to make their second purchase, and how does this vary across different cohorts?**
 
-* `customer_id`: A unique identifier for each customer.
-* `order_date`: The date when the order was placed.
-* `order_id`: A unique identifier for each order.
-* `row_id`: A unique numeric identifier for each row.
-* `sales`: The monetary amount of the sale for that order.
+## 2. Tech Stack
 
-## Project Objectives
+* **Data Ingestion**: **Fivetran**
+* **Data Source**: **GCP Cloud SQL**
+* **Data Transformation & Warehousing**: **Databricks**, **Delta Lake**, **SQL**
+* **Data Visualization**: **Databricks Dashboards**
 
-### 1. Data Transformation
+## 3. Project Objectives
 
-Transform the raw `ecom_orders` data into a new table optimized for cohort analysis, which includes:
+The project was broken down into two main objectives:
 
-* Each customer’s first purchase date.
-* Each customer’s second purchase date (if any).
-* The number of days between the first and second purchases.
+#### Data Transformation
+* Transform raw transactional data into a model optimized for cohort analysis.
+* The final table includes each customer’s first and second purchase dates and the time between them.
 
-### 2. Visualization and Analysis
+#### Visualization and Analysis
+* Create a Databricks dashboard with three key visualizations to analyze cohort trends:
+    1.  **Retention Rate Plot:** Percentage of customers returning within 1, 2, and 3 months.
+    2.  **Repeat Purchase Rate Plot:** Percentage of customers making at least a 2nd, 3rd, and 4th purchase.
+    3.  **Cohort Size Plot:** The number of new customers acquired each month.
 
-Create three key visualizations on a Databricks dashboard for analyzing cohort trends:
+## 4. Data Overview
 
-* **Retention Rate Plot:** Showing, for each cohort, the percentage of customers who placed a second order within 1, 2, and 3 months after their first purchase.
-* **Repeat Purchase Rate Plot:** Showing, for each cohort, the percentage of customers who placed at least a 2nd, 3rd, and 4th order.
-* **Cohort Size Plot:** Showing the number of new customers (by their first purchase month) in each cohort.
+The analysis is based on a simulated e-commerce sales table named `ecom_orders` with the following schema:
 
-## Implementation Steps
+* `customer_id`: Unique identifier for each customer.
+* `order_date`: The date the order was placed.
+* `order_id`: Unique identifier for each order.
+* `sales`: The monetary value of the order.
 
-### 1. Data Transformation (SQL Scripts)
+## 5. Repository Structure and SQL Scripts
 
-All SQL queries for data transformation are located in the `sql/` folder.
+This repository is organized as follows:
+* `/raw_data`: Contains the source data file(s) used for the analysis.
+* `/sql`: Contains all SQL scripts for the data pipeline.
+* `/dashboards`: Contains screenshots of the final dashboards.
+* `README.md`: Project overview (this file).
+* `ANALYSIS.md`: Detailed interpretation of the results and conclusions.
 
+### SQL Scripts Breakdown
+
+#### Data Transformation Scripts
 * `01_first_purchase_date.sql`: Calculates each customer’s first purchase date.
 * `02_second_purchase_date.sql`: Calculates each customer’s second purchase date.
 * `03_combine_and_calculate_days.sql`: Combines results and calculates days between purchases.
 * `04_create_cohort_analysis_table.sql`: Saves the final results to a new table `cohort_analysis`.
 
-### 2. Visualization and Analysis (SQL Scripts and Screenshots)
-
-SQL queries for creating visualizations are also located in the `sql/` folder. Dashboard screenshots can be found in the `dashboards/` folder.
-
-* `05_retention_rate_query.sql`: Query for calculating retention rates.  
+#### Visualization and Analysis Scripts
+* `05_retention_rate_query.sql`: Query for calculating retention rates.
 * `06_repeat_purchase_rate_query.sql`: Query for calculating repeat purchase rates.
 * `07_cohort_size_query.sql`: Query for calculating cohort size.
-    
 
-## How to Run the Project
+## 6. How to Run the Project
 
-1.  **Databricks Workspace:** Ensure you have access to a Databricks workspace.
-2.  **Data Loading:** Make sure the `ecom_orders` table is available in your database (`workspace.default.ecom_orders`). If not, you will need to load or create simulated data.
-3.  **Execute SQL Scripts:**
-    * Open a new SQL notebook in Databricks.
-    * Execute the scripts from the `sql/` folder sequentially, starting from `01_first_purchase_date.sql` and ending with `04_create_cohort_analysis_table.sql` to create the base `cohort_analysis` table.
-    * Then, execute scripts `05_retention_rate_query.sql`, `06_repeat_purchase_rate_query.sql`, and `07_cohort_size_query.sql` to generate data for visualizations.
-4.  **Create Dashboards:** Use the results of these queries to create corresponding visualizations on your Databricks dashboard.
-
-## Conclusions and Next Steps
-
-### Retention Rate by Cohort Conclusions
-Based on the "Retention Rate by Cohort" chart and the provided cohort sizes:
-
-![Retention Rate by Cohort Dashboard](dashboards/retention_rate_cohort_dashboard.png)
-
-### High Retention Rates
-
-* **2 Months:** The **April 2024** and **May 2024** cohorts show **near 100% and 100% retention**, respectively.
-* **3 Months:** The **January 2024** and **February 2024** cohorts demonstrate strong retention (around 80%), and the **March 2024** cohort nearly reaches 100%.
-
-### Notable Differences in Short-Term Retention
-
-* There's a **significant improvement in retention** for cohorts from March to May 2024 compared to earlier cohorts (January and February 2024).
-* However, the **March 2024 cohort** shows the **lowest 1-month retention (below 25%)**.
-* The **June 2024 cohort** also exhibits a **sharp drop in 1-month retention (below 25%)**, contrasting with the improvement seen in April and May, and **warrants further investigation**.
-
-### Important Considerations
-
-* **Cohort Size:** While not displayed on the chart, extremely high (near 100%) retention rates for some cohorts might be influenced by their **small size**, potentially skewing the overall picture.
- 
-### Repeat Purchase Rates by Cohort Conclusions
-
-![Repeat Purchase Rates by Cohort Dashboard](dashboards/repeat_purchase_rate_dashboard.png)
-
-* **Strong Initial Repurchase:** All cohorts show a very high percentage of customers making at least a second purchase (`repeat_rate_2nd_order`), consistently near 95-100%.
-* **Natural Decline:** As expected, the percentage of customers making a 3rd and 4th purchase gradually decreases from the initial high, reflecting a natural customer attrition at each subsequent purchase level.
-* **Overall Stability:** The repeat purchase rates for the 2nd order remain highly stable across all cohorts. While there are slight variations for 3rd and 4th orders, the overall trend indicates a successful initial re-engagement with customers.
-
-### Cohort Size by Month Conclusions
-
-![Cohort Size by Month Dashboard](dashboards/cohort_size_dashboard.png)
-
-* **Largest Cohort:** The largest cohort was observed in **January 2024**, with approximately 66 new customers.
-* **Decreasing Trend:** There is a **consistent and significant decline** in the number of new customers acquired from January to June 2024.
-* **Overall Implication:** The chart clearly indicates a **negative trend in new customer acquisition** during the first half of 2024, leading to progressively smaller subsequent cohorts. This trend is a critical factor impacting overall business growth and should be further investigated.
-
-### Next Steps
-
-Based on the cohort analysis, here are some recommended next steps:
-
-* **Investigate Declining Cohort Size:** Analyze the reasons behind the significant decrease in new customer acquisition from January to June 2024. This could involve examining marketing efforts, seasonality, or external factors.
-* **Deep Dive into Early Cohorts' Low Retention:** For cohorts with lower retention rates (e.g., January and February 2024), conduct further analysis to understand why these customers did not return as frequently. This might involve looking at product categories, initial purchase value, or customer source.
-* **Validate 100% Retention:** For the latest cohorts (May and June 2024) showing 100% retention, closely monitor their behavior as more time passes to confirm if these high rates are sustainable or an artifact of small cohort sizes/fresh data.
-* **Expand Repeat Purchase Analysis:** Explore factors influencing customers to make 3rd and 4th (and beyond) purchases. This could involve segmenting customers by product type, promotional history, or engagement with loyalty programs.
-* **Implement A/B Testing:** Based on insights, propose and test different strategies (e.g., onboarding flows, post-purchase communication, personalized offers) to improve both new customer acquisition and long-term retention.
-* **Monitor Key Metrics Continuously:** Establish a routine for monitoring these cohort metrics to track the impact of any implemented changes and identify new trends early.
+1.  **Prerequisites:** Access to a Databricks workspace.
+2.  **Data Loading:** Ensure the `ecom_orders` table is available in your database (`workspace.default.ecom_orders`).
+3.  **Execute Transformation Scripts:** In a Databricks SQL notebook, execute the scripts from the `/sql` folder sequentially from `01` to `04` to create the base `cohort_analysis` table.
+4.  **Execute Analysis Scripts:** Run scripts `05`, `06`, and `07` to generate the data required for the visualizations.
+5.  **Create Dashboards:** Use the results of the analysis queries to build the corresponding visualizations on a Databricks dashboard.
